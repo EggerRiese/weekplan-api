@@ -17,13 +17,13 @@ import java.util.Set;
 public class MealEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "meal_id_seq")
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
 
     private String description;
 
-    @OneToMany(mappedBy = "meal")
+    @OneToMany(mappedBy = "meal", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<MealIngredientEntity> mealIngredients;
 }

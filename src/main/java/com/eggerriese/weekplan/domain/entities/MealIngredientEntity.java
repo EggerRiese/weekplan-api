@@ -14,11 +14,15 @@ import lombok.NoArgsConstructor;
 @Table(name = "meal_definition")
 public class MealIngredientEntity {
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "meal_id")
     private MealEntity meal;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ingredient_id")
     private IngredientEntity ingredient;
 
