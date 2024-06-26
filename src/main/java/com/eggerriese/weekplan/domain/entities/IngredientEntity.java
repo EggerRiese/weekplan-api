@@ -22,8 +22,5 @@ public class IngredientEntity {
 
     private String name;
 
-    private String description;
-
-    @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<MealIngredientEntity> meals;
+    private String amount;
 }

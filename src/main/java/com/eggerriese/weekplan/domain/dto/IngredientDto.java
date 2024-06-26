@@ -14,4 +14,6 @@ public class IngredientDto {
     private long id;
 
     private String name;
+
+    private String amount;
 }
