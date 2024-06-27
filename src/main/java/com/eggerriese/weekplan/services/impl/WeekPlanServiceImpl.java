@@ -5,6 +5,8 @@ import com.eggerriese.weekplan.repositories.WeekPlanRepository;
 import com.eggerriese.weekplan.services.WeekPlanService;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class WeekPlanServiceImpl implements WeekPlanService {
 
@@ -15,7 +17,12 @@ public class WeekPlanServiceImpl implements WeekPlanService {
     }
 
     @Override
-    public void saveMealForTheDay(WeekPlanEntity weekPlanEntity) {
+    public void saveWeekPlan(WeekPlanEntity weekPlanEntity) {
         weekPlanRepository.save(weekPlanEntity);
+    }
+
+    @Override
+    public Optional<WeekPlanEntity> getWeekPlan(Long id) {
+        return weekPlanRepository.findById(id);
     }
 }

@@ -20,7 +20,7 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public Optional<IngredientEntity> findOne(long ingredientId) {
+    public Optional<IngredientEntity> findOne(Long ingredientId) {
         return ingredientRepository.findById(ingredientId);
     }
 
@@ -38,7 +38,7 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public void delete(long ingredientId) {
+    public void delete(Long ingredientId) {
         ingredientRepository.deleteById(ingredientId);
     }
 }

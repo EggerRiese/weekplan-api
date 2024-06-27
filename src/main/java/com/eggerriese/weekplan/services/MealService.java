@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface MealService {
 
-    Optional<MealEntity> findOne(long mealId);
+    Optional<MealEntity> findOne(Long mealId);
 
     List<MealEntity> findAll();
 
@@ -16,5 +16,5 @@ public interface MealService {
 
     MealEntity update(MealEntity MealEntity);
 
-    void delete(long mealId);
+    void delete(Long mealId);
 }

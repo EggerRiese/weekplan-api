@@ -20,7 +20,7 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public Optional<MealEntity> findOne(long mealId) {
+    public Optional<MealEntity> findOne(Long mealId) {
         return mealRepository.findById(mealId);
     }
 
@@ -48,7 +48,7 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public void delete(long mealId) {
+    public void delete(Long mealId) {
         mealRepository.deleteById(mealId);
     }
 }

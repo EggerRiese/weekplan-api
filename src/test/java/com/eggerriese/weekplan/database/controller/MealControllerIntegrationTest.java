@@ -1,6 +1,7 @@
 package com.eggerriese.weekplan.database.controller;
 
 import com.eggerriese.weekplan.database.TestData;
+import com.eggerriese.weekplan.domain.dto.MealDto;
 import com.eggerriese.weekplan.domain.entities.MealEntity;
 import com.eggerriese.weekplan.services.MealService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,8 +38,7 @@ public class MealControllerIntegrationTest {
 
     @Test
     public void test() throws Exception {
-        MealEntity meal = TestData.getMealEntity1();
-        meal.setId(null);
+        MealDto meal = TestData.getMeal1();
 
         String mealJson = objectMapper.writeValueAsString(meal);
 

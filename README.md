@@ -9,6 +9,14 @@ API to distribute and set a food week plan.
 - [ ] A meal can be added to a weekday
 - [ ] A shopping list can be exported from the week plan
 
+## API
+- POST   /meals
+- GET    /meals
+- DELETE /meals
+- POST   /weekplan
+- GET    /weekplan
+- GET    /shoppinglist
+
 ## Data model
 
 ### Ingredient 

@@ -19,17 +19,17 @@ public class WeekPlanEntity {
     @Id
     private Long date;
 
-    private long mondayMealId;
+    private Long mondayMealId;
 
-    private long tuesdayMealId;
+    private Long tuesdayMealId;
 
-    private long wednesdayMealId;
+    private Long wednesdayMealId;
 
-    private long thursdayMealId;
+    private Long thursdayMealId;
 
-    private long fridayMealId;
+    private Long fridayMealId;
 
-    private long saturdayMealId;
+    private Long saturdayMealId;
 
-    private long sundayMealId;
+    private Long sundayMealId;
 }

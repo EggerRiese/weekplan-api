@@ -8,11 +8,11 @@ import java.util.Optional;
 
 public interface IngredientService {
 
-    Optional<IngredientEntity> findOne(long ingredientId);
+    Optional<IngredientEntity> findOne(Long ingredientId);
 
     List<IngredientEntity> findAll();
 
     IngredientEntity save(IngredientEntity ingredientEntity);
 
-    void delete(long ingredientId);
+    void delete(Long ingredientId);
 }

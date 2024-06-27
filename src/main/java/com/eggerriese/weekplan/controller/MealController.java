@@ -41,14 +41,10 @@ public class MealController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping(path = "/meals/{id}")
-    public ResponseEntity<MealDto> getMeal(@PathVariable("id") long id) {
-        Optional<MealEntity> foundMeal = mealService.findOne(id);
+    @DeleteMapping(path = "/meals/{id}")
+    public ResponseEntity<MealDto> getMeal(@PathVariable("id") Long id) {
+        mealService.delete(id);
 
-        return foundMeal.map(mealEntity -> {
-            MealDto mealDto = mealMapper.mapTo(mealEntity);
-
-            return new ResponseEntity<>(mealDto, HttpStatus.FOUND);
-        }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
