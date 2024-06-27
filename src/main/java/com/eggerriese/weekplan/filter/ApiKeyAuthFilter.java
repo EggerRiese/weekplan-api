@@ -11,15 +11,17 @@ import java.io.IOException;
 
 public class ApiKeyAuthFilter extends OncePerRequestFilter {
     private static final String API_KEY_HEADER = "X-API-KEY";
+    private final String apiKey;
 
-    @Value("${api.key}")
-    private String API_KEY_VALUE;
+    public ApiKeyAuthFilter(String apiKey) {
+        this.apiKey = apiKey;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        String apiKey = request.getHeader(API_KEY_HEADER);
-        if (API_KEY_VALUE.equals(apiKey)) {
+        String requestApiKey = request.getHeader(API_KEY_HEADER);
+        if (apiKey.equals(requestApiKey)) {
             filterChain.doFilter(request, response);
         } else {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
