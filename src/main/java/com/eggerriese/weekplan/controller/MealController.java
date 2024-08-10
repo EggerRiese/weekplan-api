@@ -24,14 +24,17 @@ public class MealController {
         this.mealMapper = mealMapper;
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping(path = "/meals")
     public ResponseEntity<MealDto> createMeal(@RequestBody MealDto meal) {
         MealEntity mealEntity = mealMapper.mapFrom(meal);
+        //return new ResponseEntity<>(HttpStatus.OK);
         MealEntity savedMealEntity = mealService.save(mealEntity);
 
         return new ResponseEntity<>(mealMapper.mapTo(savedMealEntity), HttpStatus.CREATED);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping(path = "/meals")
     public List<MealDto> getMeals() {
         List<MealEntity> meals = mealService.findAll();

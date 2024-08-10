@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class WeekPlanEntity {
 
     @Id
-    private Long date;
+    private Long id;
 
     private Long mondayMealId;
 

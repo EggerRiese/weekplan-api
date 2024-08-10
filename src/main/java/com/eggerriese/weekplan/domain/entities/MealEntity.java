@@ -22,8 +22,6 @@ public class MealEntity {
 
     private String name;
 
-    private String description;
-
     @OneToMany(cascade = CascadeType.ALL)
     private Set<IngredientEntity> ingredients;
 }

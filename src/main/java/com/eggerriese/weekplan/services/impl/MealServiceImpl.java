@@ -41,7 +41,6 @@ public class MealServiceImpl implements MealService {
     public MealEntity update(MealEntity mealEntity) {
         return mealRepository.findById(mealEntity.getId()).map(existingMeal -> {
             Optional.ofNullable(mealEntity.getName()).ifPresent(existingMeal::setName);
-            Optional.ofNullable(mealEntity.getDescription()).ifPresent(existingMeal::setDescription);
 
             return mealRepository.save(existingMeal);
         }).orElseThrow(() -> new RuntimeException("Meal does not exists"));

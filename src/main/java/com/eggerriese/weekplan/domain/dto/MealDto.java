@@ -15,7 +15,5 @@ public class MealDto {
 
     private String name;
 
-    private String description;
-
     private IngredientDto[] ingredients;
 }

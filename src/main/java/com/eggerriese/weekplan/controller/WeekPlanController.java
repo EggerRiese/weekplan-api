@@ -23,7 +23,8 @@ public class WeekPlanController {
         this.weekPlanMapper = weekPlanMapper;
     }
 
-    @PostMapping(path = "/weekplan")
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/weeks")
     public ResponseEntity<String> setWeekPlan(@RequestBody WeekPlanDto weekPlanDto) {
         if (weekPlanDto.getId() <= LocalDateTime.now().getYear() * 100L
                 && weekPlanDto.getId() > (LocalDateTime.now().getYear() + 2) * 100L) {
@@ -35,7 +36,7 @@ public class WeekPlanController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping(path = "/weekplan/{id}")
+    @GetMapping(path = "/weeks/{id}")
     public ResponseEntity<WeekPlanDto> getWeekPlan(@PathVariable Long id) {
         Optional<WeekPlanEntity> foundWeekPlan = weekPlanService.getWeekPlan(id);
 
