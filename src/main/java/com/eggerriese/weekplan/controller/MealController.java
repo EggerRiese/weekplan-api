@@ -4,25 +4,22 @@ import com.eggerriese.weekplan.domain.dto.MealDto;
 import com.eggerriese.weekplan.domain.entities.MealEntity;
 import com.eggerriese.weekplan.mapper.Mapper;
 import com.eggerriese.weekplan.services.MealService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
 public class MealController {
 
-    private final MealService mealService;
+    @Autowired
+    private MealService mealService;
 
-    private final Mapper<MealEntity, MealDto> mealMapper;
-
-    public MealController(MealService mealService, Mapper<MealEntity, MealDto> mealMapper) {
-        this.mealService = mealService;
-        this.mealMapper = mealMapper;
-    }
+    @Autowired
+    private Mapper<MealEntity, MealDto> mealMapper;
 
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/meals")

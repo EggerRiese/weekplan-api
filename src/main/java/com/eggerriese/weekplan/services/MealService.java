@@ -1,20 +1,47 @@
 package com.eggerriese.weekplan.services;
 
-
 import com.eggerriese.weekplan.domain.entities.MealEntity;
+import com.eggerriese.weekplan.repositories.MealRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
-public interface MealService {
+@Service
+public class MealService {
 
-    Optional<MealEntity> findOne(Long mealId);
+    private final MealRepository mealRepository;
 
-    List<MealEntity> findAll();
+    public MealService(MealRepository mealRepository) {
+        this.mealRepository = mealRepository;
+    }
 
-    MealEntity save(MealEntity MealEntity);
+    public Optional<MealEntity> findOne(Long mealId) {
+        return mealRepository.findById(mealId);
+    }
 
-    MealEntity update(MealEntity MealEntity);
+    public List<MealEntity> findAll() {
+        return StreamSupport.stream(mealRepository
+                .findAll()
+                .spliterator(), false)
+                .collect(Collectors.toList());
+    }
 
-    void delete(Long mealId);
+    public MealEntity save(MealEntity mealEntity) {
+       return mealRepository.save(mealEntity);
+    }
+
+    public MealEntity update(MealEntity mealEntity) {
+        return mealRepository.findById(mealEntity.getId()).map(existingMeal -> {
+            Optional.ofNullable(mealEntity.getName()).ifPresent(existingMeal::setName);
+
+            return mealRepository.save(existingMeal);
+        }).orElseThrow(() -> new RuntimeException("Meal does not exists"));
+    }
+
+    public void delete(Long mealId) {
+        mealRepository.deleteById(mealId);
+    }
 }

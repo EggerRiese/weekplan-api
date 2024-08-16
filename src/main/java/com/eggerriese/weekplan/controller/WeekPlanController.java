@@ -1,27 +1,32 @@
 package com.eggerriese.weekplan.controller;
 
+import com.eggerriese.weekplan.domain.dto.IngredientDto;
 import com.eggerriese.weekplan.domain.dto.WeekPlanDto;
+import com.eggerriese.weekplan.domain.entities.IngredientEntity;
 import com.eggerriese.weekplan.domain.entities.WeekPlanEntity;
 import com.eggerriese.weekplan.mapper.Mapper;
 import com.eggerriese.weekplan.services.WeekPlanService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 public class WeekPlanController {
 
-    private final WeekPlanService weekPlanService;
+    @Autowired
+    private WeekPlanService weekPlanService;
 
-    private final Mapper<WeekPlanEntity, WeekPlanDto> weekPlanMapper;
+    @Autowired
+    private Mapper<WeekPlanEntity, WeekPlanDto> weekPlanMapper;
 
-    public WeekPlanController(WeekPlanService weekPlanService, Mapper<WeekPlanEntity, WeekPlanDto> weekPlanMapper) {
-        this.weekPlanService = weekPlanService;
-        this.weekPlanMapper = weekPlanMapper;
-    }
+    @Autowired
+    private Mapper<IngredientEntity, IngredientDto> ingredientMapper;
 
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/weeks")
@@ -37,11 +42,14 @@ public class WeekPlanController {
     }
 
     @GetMapping(path = "/weeks/{id}")
-    public ResponseEntity<WeekPlanDto> getWeekPlan(@PathVariable Long id) {
-        Optional<WeekPlanEntity> foundWeekPlan = weekPlanService.getWeekPlan(id);
+    public ResponseEntity<List<IngredientDto>> getWeekPlan(@PathVariable Long id) {
+        Optional<List<IngredientEntity>> foundWeekPlan = weekPlanService.getWeekPlan(id);
 
-        return foundWeekPlan
-                .map(weekPlanEntity -> new ResponseEntity<>(weekPlanMapper.mapTo(weekPlanEntity), HttpStatus.FOUND))
+        return foundWeekPlan.map(ingredientEntities -> new ResponseEntity<>(ingredientEntities
+                .stream()
+                .map(ingredient -> ingredientMapper.mapTo(ingredient))
+                .collect(Collectors.toList()), HttpStatus.FOUND))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+
     }
 }

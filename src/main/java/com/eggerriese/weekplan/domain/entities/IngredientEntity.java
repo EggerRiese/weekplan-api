@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "ingredient")
-public class IngredientEntity {
+public class IngredientEntity implements Cloneable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,5 +22,14 @@ public class IngredientEntity {
 
     private String name;
 
-    private String amount;
+    private int amount;
+
+    @Override
+    public IngredientEntity clone() {
+        try {
+            return (IngredientEntity) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }

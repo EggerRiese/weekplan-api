@@ -1,18 +1,39 @@
 package com.eggerriese.weekplan.services;
 
-
 import com.eggerriese.weekplan.domain.entities.IngredientEntity;
+import com.eggerriese.weekplan.repositories.IngredientRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
-public interface IngredientService {
+@Service
+public class IngredientService {
 
-    Optional<IngredientEntity> findOne(Long ingredientId);
+    private final IngredientRepository ingredientRepository;
 
-    List<IngredientEntity> findAll();
+    public IngredientService(IngredientRepository ingredientRepository) {
+        this.ingredientRepository = ingredientRepository;
+    }
 
-    IngredientEntity save(IngredientEntity ingredientEntity);
+    public Optional<IngredientEntity> findOne(Long ingredientId) {
+        return ingredientRepository.findById(ingredientId);
+    }
 
-    void delete(Long ingredientId);
+    public List<IngredientEntity> findAll() {
+        return StreamSupport.stream(ingredientRepository
+                        .findAll()
+                        .spliterator(), false)
+                .collect(Collectors.toList());
+    }
+
+    public IngredientEntity save(IngredientEntity ingredientEntity) {
+        return ingredientRepository.save(ingredientEntity);
+    }
+
+    public void delete(Long ingredientId) {
+        ingredientRepository.deleteById(ingredientId);
+    }
 }

@@ -2,8 +2,6 @@ package com.eggerriese.weekplan.database.controller;
 
 import com.eggerriese.weekplan.database.TestData;
 import com.eggerriese.weekplan.domain.dto.MealDto;
-import com.eggerriese.weekplan.domain.entities.MealEntity;
-import com.eggerriese.weekplan.services.MealService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
