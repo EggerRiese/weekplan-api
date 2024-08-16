@@ -21,16 +21,13 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @AutoConfigureMockMvc
 public class MealControllerIntegrationTest {
 
-    private MealService mealService;
-
     private MockMvc mockMvc;
 
     private ObjectMapper objectMapper;
 
     @Autowired
-    public MealControllerIntegrationTest(MockMvc mockMvc, MealService mealService) {
+    public MealControllerIntegrationTest(MockMvc mockMvc) {
         this.mockMvc = mockMvc;
-        this.mealService = mealService;
         this.objectMapper = new ObjectMapper();
     }
 
