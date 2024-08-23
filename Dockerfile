@@ -21,8 +21,6 @@ COPY src ./src
 # Package the application
 RUN mvn clean package -DskipTests
 
-RUN echo $(ls -1 ./target)
-
 # Use an official OpenJDK runtime as a parent image
 FROM --platform=linux/amd64 openjdk:22-jdk-slim
 
@@ -34,3 +32,4 @@ COPY --from=build /app/target/app.jar /app/app.jar
 
 # Run the application
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+EXPOSE 8080
